@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Information</title>
+    <style>
+         img {
+                width: 500px;
+                border-radius: 70px;
+            }
+            p {
+                font-weight: bold;
+                font-size: xx-large;
+                
+            }
+
+    </style>
+</head>
+<body>
+    <h1>Car Information</h1>
+    <div id="carInfo"></div> <!-- Placeholder for displaying car information -->
+    <img src="images/audi.jpg" alt="audi_main_image">
+    <p>The best car in the world</p>
+
+    <script>
+        // Function to fetch data from the backend API
+        function fetchData() {
+            fetch('http://localhost:3000/api/cars')
+                .then(response => response.json())
+                .then(data => {
+                    // Process the fetched data and update the HTML content
+                    const carInfoContainer = document.getElementById('carInfo');
+                    carInfoContainer.innerHTML = ''; // Clear previous content
+
+                    // Loop through the fetched data and create HTML elements to display it
+                    data.forEach(car => {
+                        const carDiv = document.createElement('div');
+                        carDiv.innerHTML = `
+                            <p>ID: ${car.id}</p>
+                            <p>Name: ${car.name}</p>
+                            <p>Engine: ${car.engine}</p>
+                            <p>Horsepower: ${car.horsepower}</p>
+                            <p>Generation: ${car.generation}</p>
+                        `;
+                        carInfoContainer.appendChild(carDiv); // Append the created element
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    // Handle error (e.g., display an error message)
+                });
+        }
+
+        // Call the fetchData function when the page loads
+        window.onload = fetchData;
+    </script>
+</body>
+</html>

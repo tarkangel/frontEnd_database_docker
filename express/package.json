@@ -1,0 +1,10 @@
+{
+    "name": "web-server",
+    "version": "1.0.0",
+    "description": "Web server for displaying data from MySQL database",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mysql2": "^2.3.0"
+    }
+}
